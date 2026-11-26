@@ -59,6 +59,12 @@ def create_app(
     def documents() -> dict:
         return {"documents": library.list_documents()}
 
+    @application.post("/api/demo")
+    def load_demo() -> dict:
+        sample = ROOT / "samples" / "sample-handbook.md"
+        document, duplicate = library.add_file(sample.name, sample.read_bytes())
+        return {"document": document, "duplicate": duplicate}
+
     @application.post("/api/documents")
     async def upload_document(file: UploadFile = File(...)) -> dict:
         filename = file.filename or "document"

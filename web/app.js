@@ -102,5 +102,15 @@ askButton.addEventListener('click', async () => {
   } finally { askButton.disabled = false; askButton.firstElementChild.textContent = 'Ask'; }
 });
 questionInput.addEventListener('keydown', (event) => { if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') askButton.click(); });
+document.querySelector('#load-demo').addEventListener('click', async () => {
+  const button = document.querySelector('#load-demo'); button.disabled = true; button.textContent = 'Loading sample…';
+  try {
+    const result = await request('/api/demo', { method: 'POST' });
+    uploadStatus.textContent = result.duplicate ? 'Demo handbook is already in your library.' : 'Fictional demo handbook added.';
+    await refreshDocuments();
+    questionInput.value = 'How soon should I report a lost laptop?';
+  } catch (error) { uploadStatus.textContent = error.message; uploadStatus.className = 'status error'; }
+  finally { button.disabled = false; button.textContent = 'Or load the fictional demo handbook'; }
+});
 
 refreshDocuments().catch((error) => { uploadStatus.textContent = error.message; uploadStatus.className = 'status error'; });

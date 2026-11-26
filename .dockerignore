@@ -1,0 +1,13 @@
+.git
+.github
+.venv
+__pycache__
+*.py[cod]
+.env
+data
+tests
+.agents
+AGENTS.md
+README.md
+CONTRIBUTING.md
+SECURITY.md
