@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f8f6">
+  <title>Document Intelligence Copilot</title>
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Document library">
+      <a class="brand" href="/" aria-label="Document Intelligence Copilot home">
+        <span class="brand-mark" aria-hidden="true">D</span>
+        <span><strong>Index</strong><small>DOCUMENT COPILOT</small></span>
+      </a>
+      <div class="library-heading"><div><h2>Your library</h2><span id="document-count" class="count">0</span></div>
+        <button id="add-document" class="icon-button" type="button" aria-label="Add a document">+</button>
+      </div>
+      <form id="upload-form" class="upload-box">
+        <input id="file-input" type="file" accept=".pdf,.docx,.txt,.md" hidden>
+        <button id="dropzone" class="dropzone" type="button">
+          <span class="upload-icon" aria-hidden="true">↑</span>
+          <strong>Add your first document</strong>
+          <span>PDF, DOCX, TXT or MD · up to 20 MB</span>
+        </button>
+        <p id="upload-status" class="status" role="status"></p>
+      </form>
+      <ul id="documents-list" class="documents-list" aria-label="Indexed documents"></ul>
+      <div class="sidebar-note"><span class="lock-icon" aria-hidden="true">⌑</span><p><strong>Private by default</strong><br>Files and search index stay on this machine.</p></div>
+      <a class="footer-link" href="https://github.com/Ronakrai0001/document-intelligence-copilot" target="_blank" rel="noreferrer">Built in the open ↗</a>
+    </aside>
+
+    <main class="main-panel">
+      <header class="topbar"><span class="local-indicator"><i></i> LOCAL WORKSPACE</span><span class="topbar-hint">Grounded answers, with sources</span></header>
+      <section class="workspace" aria-labelledby="welcome-title">
+        <div class="eyebrow"><span class="sparkle" aria-hidden="true">✳</span> YOUR DOCUMENTS, ANSWERED</div>
+        <h1 id="welcome-title">Good questions deserve<br><em>good sources.</em></h1>
+        <p class="intro">Add a document, ask what matters, and follow every answer back to the passage it came from.</p>
+
+        <div class="question-card">
+          <label for="question">Ask your library</label>
+          <textarea id="question" rows="3" maxlength="1200" placeholder="What does the policy say about…"></textarea>
+          <div class="question-controls">
+            <div class="mode-control"><label class="toggle-label" for="ai-toggle"><input id="ai-toggle" type="checkbox"><span class="toggle"></span><span>Use AI to draft an answer</span></label>
+              <span class="privacy-hint">Off by default · sends matched excerpts to OpenAI</span></div>
+            <button id="ask-button" class="primary-button" type="button"><span>Ask</span><span aria-hidden="true">↗</span></button>
+          </div>
+          <div id="ai-consent" class="consent" hidden>When enabled, your question and the retrieved text excerpts are sent to OpenAI for this answer. Original files and the local index remain on your device.</div>
+        </div>
+
+        <div id="answer-area" class="answer-area" aria-live="polite"></div>
+        <div id="empty-state" class="empty-state">
+          <span class="empty-icon" aria-hidden="true">⌕</span>
+          <h2>Your source trail starts here</h2>
+          <p>Upload a document to find relevant passages. Page numbers are shown for PDFs; other files are cited by passage.</p>
+          <button id="empty-upload" class="text-button" type="button">Choose a document <span aria-hidden="true">→</span></button>
+        </div>
+        <p class="disclaimer">Search uses local keyword relevance. Always open the cited passage and verify important decisions.</p>
+      </section>
+    </main>
+  </div>
+  <script src="/static/app.js" defer></script>
+</body>
+</html>
